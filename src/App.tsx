@@ -130,7 +130,7 @@ function App() {
         <Route path="/add-user" element={<AddUser db={db} />} />
         <Route path="/add-post" element={<AddPost db={db} />} />
       </Routes>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
     </div>
   );
 }

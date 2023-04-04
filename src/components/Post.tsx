@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 type PostProps = {
@@ -30,6 +30,7 @@ const Post: React.FC<PostProps> = ({
 }) => {
   const [person, setPerson] = useState({} as Person);
   const [show, setShow] = useState(false);
+  const infoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const personsRef = db.collection("persons");
@@ -42,7 +43,6 @@ const Post: React.FC<PostProps> = ({
           // Get the first document that matches the query and save it in state
           const doc = querySnapshot.docs[0];
           setPerson(doc.data() as Person);
-          console.log(doc.data());
         } else {
           console.log("No documents found.");
         }
@@ -75,19 +75,11 @@ const Post: React.FC<PostProps> = ({
           </div>
           <p className="status serif">{person.status}</p>
         </div>
-        <p
-          className="info-icon"
-          onMouseEnter={() => setShow(true)}
-          onMouseLeave={() => setShow(false)}
-        >
+        <p ref={infoRef} className="info-icon">
           &#9432;
         </p>
         {show ? (
-          <p
-            className="info-icon reference"
-            onMouseEnter={() => setShow(true)}
-            onMouseLeave={() => setShow(false)}
-          >
+          <p className="info-icon reference">
             <h3>Πηγές</h3>
             <br />
             Lorem ipsum dolor sit amet consectetur adipisicing elit. At

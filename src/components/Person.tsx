@@ -77,6 +77,8 @@ const Person = () => {
       .catch((error) => {
         console.log("Error getting documents:", error);
       });
+
+    document.title = "Person | Olympgram";
   }, [id]);
 
   return (

@@ -1,8 +1,7 @@
 import firebase from "firebase/compat";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Post from "./Post";
 import Loading from "./Loading";
-import { useCookies } from "react-cookie";
 
 type Props = {
   db: firebase.firestore.Firestore;
@@ -19,47 +18,60 @@ type Post = {
 const Home: React.FC<Props> = ({ db }) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [cookies, setCookie] = useCookies(["scrollAmount"]);
+  const collectionRef = db.collection("posts");
+  const query = collectionRef.orderBy("year");
 
-  const scrollAmount = cookies.scrollAmount || 0;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollAmount = window.scrollY;
-      setCookie("scrollAmount", scrollAmount, { path: "/guest" });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [setCookie]);
+  const containerRef = useRef<HTMLDivElement>(null); // create a ref to the container element
 
   useEffect(() => {
-    window.scrollTo(0, scrollAmount);
-  }, [scrollAmount]);
+    // check if posts are cached
+    const cachedPosts = sessionStorage.getItem("posts");
 
-  useEffect(() => {
-    const collectionRef = db.collection("posts");
-    const query = collectionRef.orderBy("year");
+    if (cachedPosts) {
+      // if posts are cached, use them to set the state of the component
+      const posts = JSON.parse(cachedPosts);
+      setPosts(posts);
+      setIsLoading(false);
 
-    query
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+      // restore scroll position if available
+      const scrollPosition = sessionStorage.getItem("scrollPosition");
+      if (scrollPosition) {
+        containerRef.current?.scrollTo(0, parseInt(scrollPosition));
+      }
+    } else {
+      // if posts are not cached, fetch them from Firebase and cache them
+      query
+        .get()
+        .then((querySnapshot) => {
           const data = querySnapshot.docs.map((doc) => doc.data() as Post);
           setPosts(data);
+          sessionStorage.setItem("posts", JSON.stringify(data)); // cache posts
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log("Error getting documents:", error);
         });
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log("Error getting documents:", error);
-      });
+    }
+
+    document.title = "Home | Olympgram";
   }, [db]);
 
+  useEffect(() => {
+    // add event listener to save scroll position
+    const handleScroll = () => {
+      sessionStorage.setItem(
+        "scrollPosition",
+        containerRef.current?.scrollTop.toString() || "0"
+      );
+    };
+    containerRef.current?.addEventListener("scroll", handleScroll);
+    return () => {
+      containerRef.current?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="home">
+    <div className="home" ref={containerRef}>
       <div className="posts">
         {isLoading ? (
           <Loading />
