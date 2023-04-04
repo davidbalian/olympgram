@@ -8,11 +8,11 @@ type Props = {
 };
 
 type Post = {
-  username: String;
-  location: String;
-  text: String;
+  username: string;
+  location: string;
+  text: string;
   year: number;
-  image: String;
+  image: string;
 };
 
 const Home: React.FC<Props> = ({ db }) => {
@@ -21,54 +21,31 @@ const Home: React.FC<Props> = ({ db }) => {
   const collectionRef = db.collection("posts");
   const query = collectionRef.orderBy("year");
 
-  const containerRef = useRef<HTMLDivElement>(null); // create a ref to the container element
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // check if posts are cached
     const cachedPosts = sessionStorage.getItem("posts");
-
     if (cachedPosts) {
-      // if posts are cached, use them to set the state of the component
-      const posts = JSON.parse(cachedPosts);
-      setPosts(posts);
+      setPosts(JSON.parse(cachedPosts));
       setIsLoading(false);
-
-      // restore scroll position if available
-      const scrollPosition = sessionStorage.getItem("scrollPosition");
-      if (scrollPosition) {
-        containerRef.current?.scrollTo(0, parseInt(scrollPosition));
-      }
-    } else {
-      // if posts are not cached, fetch them from Firebase and cache them
-      query
-        .get()
-        .then((querySnapshot) => {
-          const data = querySnapshot.docs.map((doc) => doc.data() as Post);
-          setPosts(data);
-          sessionStorage.setItem("posts", JSON.stringify(data)); // cache posts
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.log("Error getting documents:", error);
-        });
+      return;
     }
+
+    query
+      .get()
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => doc.data() as Post);
+        setPosts(data);
+        sessionStorage.setItem("posts", JSON.stringify(data));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log("Error getting documents:", error);
+        setIsLoading(false);
+      });
 
     document.title = "Home | Olympgram";
   }, [db]);
-
-  useEffect(() => {
-    // add event listener to save scroll position
-    const handleScroll = () => {
-      sessionStorage.setItem(
-        "scrollPosition",
-        containerRef.current?.scrollTop.toString() || "0"
-      );
-    };
-    containerRef.current?.addEventListener("scroll", handleScroll);
-    return () => {
-      containerRef.current?.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <div className="home" ref={containerRef}>
