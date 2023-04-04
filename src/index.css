@@ -436,12 +436,9 @@ header .logo {
   bottom: 1rem;
 }
 
-.add-form button {
-  width: fit-content;
-}
-
 table {
   font-family: sans-serif;
+  width: 100vw;
 }
 
 th {
@@ -454,6 +451,7 @@ td {
   padding: 0.5rem;
   border-bottom: 1px solid var(--main);
   border-right: 1px solid var(--main);
+  width: 200px;
 }
 
 textarea {
@@ -462,10 +460,18 @@ textarea {
   min-height: 200px;
 }
 
+.add-form button {
+  width: fit-content;
+}
+
 .headings {
   position: sticky;
   top: 0;
   background-color: white;
+}
+
+.headings * {
+  font-weight: bold;
 }
 
 @media (max-width: 1024px) {

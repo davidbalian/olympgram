@@ -18,7 +18,7 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-type Person = {
+export type Person = {
   username: String;
   name: String;
   status: String;
