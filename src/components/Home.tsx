@@ -12,7 +12,7 @@ type Post = {
   username: String;
   location: String;
   text: String;
-  year: Number;
+  year: number;
   image: String;
 };
 
@@ -65,17 +65,19 @@ const Home: React.FC<Props> = ({ db }) => {
           <Loading />
         ) : (
           <>
-            {posts.map((post) => (
-              <Post
-                key={post.text.toString()}
-                db={db}
-                username={post.username}
-                location={post.location}
-                text={post.text}
-                year={post.year}
-                image={post.image ? post.image : ""}
-              />
-            ))}
+            {posts
+              .sort((a, b) => a.year - b.year)
+              .map((post) => (
+                <Post
+                  key={post.text.toString()}
+                  db={db}
+                  username={post.username}
+                  location={post.location}
+                  text={post.text}
+                  year={post.year}
+                  image={post.image ? post.image : ""}
+                />
+              ))}
           </>
         )}
       </div>
