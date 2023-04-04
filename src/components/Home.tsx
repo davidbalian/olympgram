@@ -2,6 +2,7 @@ import firebase from "firebase/compat";
 import { useEffect, useState } from "react";
 import Post from "./Post";
 import Loading from "./Loading";
+import { useCookies } from "react-cookie";
 
 type Props = {
   db: firebase.firestore.Firestore;
@@ -18,6 +19,26 @@ type Post = {
 const Home: React.FC<Props> = ({ db }) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cookies, setCookie] = useCookies(["scrollAmount"]);
+
+  const scrollAmount = cookies.scrollAmount || 0;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollAmount = window.scrollY;
+      setCookie("scrollAmount", scrollAmount, { path: "/guest" });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [setCookie]);
+
+  useEffect(() => {
+    window.scrollTo(0, scrollAmount);
+  }, [scrollAmount]);
 
   useEffect(() => {
     const collectionRef = db.collection("posts");
