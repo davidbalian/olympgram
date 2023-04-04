@@ -66,14 +66,14 @@ const Post: React.FC<PostProps> = ({
         />
         <div className="user-info">
           <div className="user-location">
-            <Link to={`/${username}`} className="username serif bold">
+            <Link to={`/${username}`} className="username serif">
               {person.name}
             </Link>
             <p>•</p>
-            <p className="location serif">{location}, </p>
-            <p className="year serif">{year.toString()} μ.Χ</p>
+            <p className="location">{location}, </p>
+            <p className="year">{year.toString()} μ.Χ</p>
           </div>
-          <p className="status serif">{person.status}</p>
+          <p className="status">{person.status}</p>
         </div>
         <p ref={infoRef} className="info-icon">
           &#9432;

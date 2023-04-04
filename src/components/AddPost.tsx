@@ -12,6 +12,7 @@ export type Post = {
   location: string;
   year: number;
   image: string;
+  references: string;
 };
 
 const AddPost: FC<Props> = ({ db }) => {
@@ -23,6 +24,7 @@ const AddPost: FC<Props> = ({ db }) => {
   const [location, setLocation] = useState("");
   const [year, setYear] = useState(0);
   const [image, setImage] = useState("");
+  const [references, setReferences] = useState("");
 
   const [usernames, setUsernames] = useState<string[]>([] as string[]);
 
@@ -40,6 +42,7 @@ const AddPost: FC<Props> = ({ db }) => {
       location,
       year,
       image,
+      references,
     };
 
     postsRef
@@ -50,6 +53,7 @@ const AddPost: FC<Props> = ({ db }) => {
         setLocation("");
         setYear(0);
         setImage("");
+        setReferences("");
       })
       .catch((err) => {
         console.log(err);
@@ -75,6 +79,9 @@ const AddPost: FC<Props> = ({ db }) => {
         break;
       case "image":
         setImage(value);
+        break;
+      case "references":
+        setReferences(value);
         break;
       default:
         break;
@@ -110,6 +117,7 @@ const AddPost: FC<Props> = ({ db }) => {
           location: doc.data().location,
           year: doc.data().year,
           image: doc.data().image,
+          references: doc.data().references,
         };
         newPost.push(post);
       });
@@ -156,6 +164,9 @@ const AddPost: FC<Props> = ({ db }) => {
               </td>
               <td>
                 <label htmlFor="profileUrl">Image Url</label>
+              </td>
+              <td>
+                <label htmlFor="references">References</label>
               </td>
               <td>Actions</td>
             </tr>
@@ -206,6 +217,15 @@ const AddPost: FC<Props> = ({ db }) => {
                 />
               </td>
               <td>
+                <input
+                  type="text"
+                  id="references"
+                  name="references"
+                  value={references}
+                  onChange={handleChange}
+                />
+              </td>
+              <td>
                 <button type="submit">Add Post</button>
               </td>
             </tr>
@@ -236,6 +256,9 @@ const AddPost: FC<Props> = ({ db }) => {
             </td>
             <td>
               <label htmlFor="profileUrl">Image Url</label>
+            </td>
+            <td>
+              <label htmlFor="references">References</label>
             </td>
             <td>Actions</td>
           </tr>
@@ -285,6 +308,15 @@ const AddPost: FC<Props> = ({ db }) => {
                     type="text"
                     defaultValue={post.image}
                     onBlur={(e) => handleEdit(e.target.value, post.id, "image")}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    defaultValue={post.references}
+                    onBlur={(e) =>
+                      handleEdit(e.target.value, post.id, "references")
+                    }
                   />
                 </td>
                 <td>

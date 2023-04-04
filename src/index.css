@@ -7,6 +7,7 @@
   --dark: #191919;
   --light: hsl(0, 0%, 40%);
   --main: #261003;
+  --serif: "EB Garamond", serif;
 }
 
 * {
@@ -74,13 +75,13 @@
 
 h1,
 h2 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--serif);
   font-weight: 600;
   color: var(--main);
 }
 
 h3 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--serif);
 }
 
 h1 {
@@ -111,6 +112,10 @@ input {
 
 .btn {
   text-align: center;
+}
+
+.serif {
+  font-family: var(--serif);
 }
 
 a,
@@ -257,7 +262,7 @@ header .logo {
 
 .username {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .post-text {
@@ -267,6 +272,7 @@ header .logo {
 .user-location {
   display: flex;
   gap: 0.25rem;
+  align-items: center;
 }
 
 .post-info {
@@ -398,10 +404,15 @@ header .logo {
   }
 }
 
+.profile-page {
+  margin-top: 50px;
+  padding-bottom: 2rem;
+}
+
 .username-profile {
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: var(--serif);
 }
 
 .username-profile,
@@ -410,7 +421,9 @@ header .logo {
 }
 
 .profile-background {
-  width: 100vw;
+  max-width: 1000px;
+  margin: auto;
+  border-radius: 0 0 8px 8px;
   height: 350px;
 }
 
@@ -429,6 +442,7 @@ header .logo {
   height: 150px;
   width: 150px;
   border-radius: 50%;
+  border: 2px solid var(--accent-transparent);
 }
 
 .bio {
