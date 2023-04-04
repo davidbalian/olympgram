@@ -239,59 +239,61 @@ const AddPost: FC<Props> = ({ db }) => {
             </td>
             <td>Actions</td>
           </tr>
-          {posts.map((post) => (
-            <tr key={post.id}>
-              <td>
-                <select
-                  defaultValue={post.username}
-                  onBlur={(e) =>
-                    handleEdit(e.target.value, post.id, "username")
-                  }
-                >
-                  <option value="">Select a username</option>
-                  {usernames.map((username) => (
-                    <option key={username} value={username}>
-                      {username}
-                    </option>
-                  ))}
-                </select>
-              </td>
-              <td>
-                <textarea
-                  defaultValue={post.text}
-                  onBlur={(e) => handleEdit(e.target.value, post.id, "text")}
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  defaultValue={post.location}
-                  onBlur={(e) =>
-                    handleEdit(e.target.value, post.id, "location")
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  defaultValue={post.year}
-                  onBlur={(e) => handleEdit(e.target.value, post.id, "year")}
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  defaultValue={post.image}
-                  onBlur={(e) => handleEdit(e.target.value, post.id, "image")}
-                />
-              </td>
-              <td>
-                <button onClick={() => handleDelete(post.id.toString())}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {posts
+            .sort((a, b) => a.year - b.year)
+            .map((post) => (
+              <tr key={post.id}>
+                <td>
+                  <select
+                    defaultValue={post.username}
+                    onBlur={(e) =>
+                      handleEdit(e.target.value, post.id, "username")
+                    }
+                  >
+                    <option value="">Select a username</option>
+                    {usernames.map((username) => (
+                      <option key={username} value={username}>
+                        {username}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td>
+                  <textarea
+                    defaultValue={post.text}
+                    onBlur={(e) => handleEdit(e.target.value, post.id, "text")}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    defaultValue={post.location}
+                    onBlur={(e) =>
+                      handleEdit(e.target.value, post.id, "location")
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    defaultValue={post.year}
+                    onBlur={(e) => handleEdit(e.target.value, post.id, "year")}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    defaultValue={post.image}
+                    onBlur={(e) => handleEdit(e.target.value, post.id, "image")}
+                  />
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(post.id.toString())}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </>

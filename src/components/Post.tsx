@@ -82,20 +82,20 @@ const Post: React.FC<PostProps> = ({
         >
           &#9432;
         </p>
-        <p
-          className={`info-icon reference ${
-            show ? "show-reference" : "hide-reference"
-          }`}
-          onMouseEnter={() => setShow(true)}
-          onMouseLeave={() => setShow(false)}
-        >
-          <h3>Πηγές</h3>
-          <br />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At reiciendis
-          repellendus facilis, odit ab culpa dolorum aperiam voluptatem animi
-          alias tempore ullam consequuntur labore iste omnis ad suscipit.
-          Corrupti, ab.
-        </p>
+        {show ? (
+          <p
+            className="info-icon reference"
+            onMouseEnter={() => setShow(true)}
+            onMouseLeave={() => setShow(false)}
+          >
+            <h3>Πηγές</h3>
+            <br />
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. At
+            reiciendis repellendus facilis, odit ab culpa dolorum aperiam
+            voluptatem animi alias tempore ullam consequuntur labore iste omnis
+            ad suscipit. Corrupti, ab.
+          </p>
+        ) : null}
       </div>
       <p className="post-text">{text}</p>
       {image ? (

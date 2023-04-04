@@ -24,7 +24,7 @@ export type Person = {
   status: String;
   bio: String;
   profileUrl: string;
-  backgroundUrl: String;
+  backgroundUrl: string;
 };
 
 type Post = {
