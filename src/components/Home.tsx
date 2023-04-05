@@ -50,12 +50,22 @@ const Home: React.FC<Props> = ({ db }) => {
 
   return (
     <div className="home" ref={containerRef}>
-      <h2>Start scrolling...</h2>
+      {/* <h2>Start scrolling...</h2> */}
       <div className="posts">
         {isLoading ? (
           <Loading />
         ) : (
           <>
+            <div className="post">
+              <h2>Καλωσόρισες Αρίστων! </h2>
+              <p style={{ textAlign: "center" }}>
+                Είσαι από την Κύπρο η οποία ανήκει στην Ρωμαίικη αυτοκρατορία,
+                και επειδή είσαι κοινωνικός, έχεις φίλους στα social media όπως
+                γιατρούς, ταξιδιώτες, νοικοκυρές και άλλους. Κάνε scroll και
+                μάθε περισσότερα για τη ζωή των ανθρώπων τότε, ενώ μπορείς
+                επίσης να πατήσεις στα προφίλ για να μάθεις περισσότερα.
+              </p>
+            </div>
             {posts
               .sort((a, b) => a.year - b.year)
               .map((post) => (
