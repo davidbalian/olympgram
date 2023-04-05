@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import InfoPopup from "./InfoPopup";
 
 type PostProps = {
   username: String;
@@ -8,6 +9,7 @@ type PostProps = {
   text: String;
   year: Number;
   image: String;
+  reference: string;
   db: firebase.firestore.Firestore;
 };
 
@@ -26,11 +28,11 @@ const Post: React.FC<PostProps> = ({
   text,
   year,
   image,
+  reference,
   db,
 }) => {
   const [person, setPerson] = useState({} as Person);
   const [show, setShow] = useState(false);
-  const infoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const personsRef = db.collection("persons");
@@ -75,19 +77,7 @@ const Post: React.FC<PostProps> = ({
           </div>
           <p className="status">{person.status}</p>
         </div>
-        <p ref={infoRef} className="info-icon">
-          &#9432;
-        </p>
-        {show ? (
-          <p className="info-icon reference">
-            <h3>Πηγές</h3>
-            <br />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-            reiciendis repellendus facilis, odit ab culpa dolorum aperiam
-            voluptatem animi alias tempore ullam consequuntur labore iste omnis
-            ad suscipit. Corrupti, ab.
-          </p>
-        ) : null}
+        <InfoPopup reference="lorem ipsum dolor sit amet" />
       </div>
       <p className="post-text">{text}</p>
       {image ? (

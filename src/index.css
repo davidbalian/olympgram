@@ -37,13 +37,23 @@
 
 .reference {
   background-color: var(--main);
-  color: var(--accent);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.55);
   z-index: 50;
-  max-width: 40ch;
-  transform: translateX(105%);
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateX(10px);
+  width: 35ch;
+}
+
+.reference * {
+  color: var(--accent);
+}
+
+.reference p {
+  margin-top: 1rem;
 }
 
 .show-reference {
@@ -545,10 +555,9 @@ textarea {
     position: fixed;
     top: 50%;
     left: 50%;
-    z-index: 50;
-    width: 80%;
-    margin: auto;
     transform: translate(-50%, -50%);
+    width: 90%;
+    box-shadow: 0 0 200px 100px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -562,7 +571,7 @@ textarea {
   }
 
   .home {
-    padding: calc(50px + 2rem) 0;
+    padding: 40vh 0 4rem 0;
   }
 
   .welcome-description {

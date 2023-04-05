@@ -32,6 +32,7 @@ type Post = {
   location: String;
   text: String;
   year: Number;
+  reference: string;
   image: String;
 };
 
@@ -131,6 +132,7 @@ const Person = () => {
                       location={post.location}
                       text={post.text}
                       year={post.year}
+                      reference={post.reference}
                       image={post.image ? post.image : ""}
                       db={db}
                     />

@@ -12,6 +12,7 @@ type Post = {
   location: string;
   text: string;
   year: number;
+  reference?: string;
   image: string;
 };
 
@@ -65,6 +66,7 @@ const Home: React.FC<Props> = ({ db }) => {
                   location={post.location}
                   text={post.text}
                   year={post.year}
+                  reference={post.reference ? post.reference : ""}
                   image={post.image ? post.image : ""}
                 />
               ))}
