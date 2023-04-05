@@ -77,7 +77,7 @@ const Post: React.FC<PostProps> = ({
           </div>
           <p className="status">{person.status}</p>
         </div>
-        <InfoPopup reference="lorem ipsum dolor sit amet" />
+        <InfoPopup reference={reference} />
       </div>
       <p className="post-text">{text}</p>
       {image ? (
