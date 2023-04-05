@@ -26,6 +26,8 @@ const firebaseConfig = {
 
 const db: firebase.firestore.Firestore = firebase.firestore();
 
+firebase.initializeApp(firebaseConfig);
+
 function App() {
   const [user, setUser] = useState<firebase.User | null>(null);
   const auth = firebase.auth();
@@ -40,9 +42,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    firebase.initializeApp(firebaseConfig);
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
