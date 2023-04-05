@@ -16,7 +16,7 @@ import Signup from "./components/Signup";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC-be2hEU-eyyD1bgpEgVRJ5opojfnphqY",
-  authDomain: "olympgram.com",
+  authDomain: "history-cb003.firebaseapp.com",
   projectId: "history-cb003",
   storageBucket: "history-cb003.appspot.com",
   messagingSenderId: "340751040194",
@@ -25,8 +25,6 @@ const firebaseConfig = {
 };
 
 const db: firebase.firestore.Firestore = firebase.firestore();
-
-firebase.initializeApp(firebaseConfig);
 
 function App() {
   const [user, setUser] = useState<firebase.User | null>(null);
@@ -42,7 +40,9 @@ function App() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    firebase.initializeApp(firebaseConfig);
+  }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -96,7 +96,7 @@ function App() {
             )
           }
         />
-        <Route
+        {/* <Route
           path="/signup"
           element={
             user ? (
@@ -108,7 +108,7 @@ function App() {
               </div>
             )
           }
-        />
+        /> */}
         <Route
           path="/guest"
           element={

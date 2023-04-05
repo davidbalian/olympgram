@@ -13,15 +13,26 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
+  //   firebase
+  //     .auth()
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then(() => {
+  //       navigate("/");
+  //     })
+  //     .catch((error) => {
+  //       setError(error.message);
+  //     });
+  // };
+
+  const handleGoogleLogin = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        navigate("/");
-      })
+      .signInWithPopup(provider)
+      .then(() => {})
       .catch((error) => {
         setError(error.message);
       });
@@ -30,7 +41,7 @@ const Login = () => {
   return (
     <div className="login">
       <img src={logo} alt="olympgram logo" className="logo" />
-      <form onSubmit={handleSubmit}>
+      <form>
         {/* <input
           type="email"
           name="email"
@@ -53,16 +64,17 @@ const Login = () => {
           <p>or</p>
           <hr />
         </div> */}
-        <GoogleLogin />
+        <Link to="/guest" className="btn">
+          Continue as Guest
+        </Link>
         <div className="login-divider">
           <hr />
           <p>or</p>
           <hr />
         </div>
-        <Link to="/guest" className="btn">
-          Continue as Guest
-        </Link>
       </form>
+      <GoogleLogin />
+
       {error && <p>{error}</p>}
       {/* <p className="small">
         No account? <Link to="/signup">Register here.</Link>

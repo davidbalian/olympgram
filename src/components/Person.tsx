@@ -6,7 +6,7 @@ import Loading from "./Loading";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC-be2hEU-eyyD1bgpEgVRJ5opojfnphqY",
-  authDomain: "olympgram.com",
+  authDomain: "history-cb003.firebaseapp.com",
   projectId: "history-cb003",
   storageBucket: "history-cb003.appspot.com",
   messagingSenderId: "340751040194",
