@@ -25,12 +25,12 @@ const Home: React.FC<Props> = ({ db }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cachedPosts = sessionStorage.getItem("posts");
-    if (cachedPosts) {
-      setPosts(JSON.parse(cachedPosts));
-      setIsLoading(false);
-      return;
-    }
+    // const cachedPosts = sessionStorage.getItem("posts");
+    // if (cachedPosts) {
+    //   setPosts(JSON.parse(cachedPosts));
+    //   setIsLoading(false);
+    //   return;
+    // }
 
     query
       .get()
