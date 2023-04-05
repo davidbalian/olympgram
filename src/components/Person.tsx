@@ -92,7 +92,7 @@ const Person = () => {
               style={{
                 backgroundImage: `linear-gradient(to top, rgba(0,0,0,.8), rgba(0,0,0,0)), url(${
                   person.backgroundUrl
-                    ? person.backgroundUrl
+                    ? `https://cdn.jsdelivr.net/gh/davidbalian/history-media/${person.backgroundUrl}`
                     : "https://images.unsplash.com/photo-1643843207818-1bc6fc99b65f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                 })`,
                 backgroundSize: "cover",
@@ -104,7 +104,7 @@ const Person = () => {
               <img
                 src={`${
                   person.profileUrl
-                    ? person.profileUrl
+                    ? `https://cdn.jsdelivr.net/gh/davidbalian/history-media/${person.profileUrl}`
                     : "https://cdn.jsdelivr.net/gh/davidbalian/history-media/default-profile.jpeg"
                 }`}
                 alt="profile"

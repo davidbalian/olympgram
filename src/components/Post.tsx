@@ -61,7 +61,7 @@ const Post: React.FC<PostProps> = ({
           className="profile-picture"
           src={
             person.profileUrl
-              ? person.profileUrl
+              ? `https://cdn.jsdelivr.net/gh/davidbalian/history-media/${person.profileUrl}`
               : "https://cdn.jsdelivr.net/gh/davidbalian/history-media/default-profile.jpeg"
           }
           alt="profile"

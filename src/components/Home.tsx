@@ -77,7 +77,11 @@ const Home: React.FC<Props> = ({ db }) => {
                   text={post.text}
                   year={post.year}
                   reference={post.reference ? post.reference : ""}
-                  image={post.image ? post.image : ""}
+                  image={
+                    post.image
+                      ? `https://cdn.jsdelivr.net/gh/davidbalian/history-media/${post.image}`
+                      : ""
+                  }
                 />
               ))}
           </>
