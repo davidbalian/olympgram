@@ -49,6 +49,7 @@ const Home: React.FC<Props> = ({ db }) => {
 
   return (
     <div className="home" ref={containerRef}>
+      <h2>Start scrolling...</h2>
       <div className="posts">
         {isLoading ? (
           <Loading />
