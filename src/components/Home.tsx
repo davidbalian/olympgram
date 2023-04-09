@@ -12,7 +12,7 @@ type Post = {
   location: string;
   text: string;
   year: number;
-  reference?: string;
+  references: string;
   image: string;
 };
 
@@ -39,6 +39,7 @@ const Home: React.FC<Props> = ({ db }) => {
         setPosts(data);
         sessionStorage.setItem("posts", JSON.stringify(data));
         setIsLoading(false);
+        console.log(data);
       })
       .catch((error) => {
         console.log("Error getting documents:", error);
@@ -76,7 +77,7 @@ const Home: React.FC<Props> = ({ db }) => {
                   location={post.location}
                   text={post.text}
                   year={post.year}
-                  reference={post.reference ? post.reference : ""}
+                  references={post.references ? post.references : ""}
                   image={
                     post.image
                       ? `https://cdn.jsdelivr.net/gh/davidbalian/history-media/${post.image}`

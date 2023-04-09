@@ -32,7 +32,7 @@ type Post = {
   location: String;
   text: String;
   year: Number;
-  reference: string;
+  references: string;
   image: String;
 };
 
@@ -113,10 +113,22 @@ const Person = () => {
               <div>
                 <p className="username-profile">{person.name}</p>
                 <p className="username-status">{person.status}</p>
-                <p className="bio">{person.bio}</p>
               </div>
             </div>
-
+            {person.bio ? (
+              <>
+                <h2
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "4rem",
+                    marginTop: "-2rem",
+                  }}
+                >
+                  Bio
+                </h2>
+                <p className="bio">{person.bio}</p>
+              </>
+            ) : null}
             {isLoading ? (
               <Loading />
             ) : (
@@ -132,8 +144,12 @@ const Person = () => {
                       location={post.location}
                       text={post.text}
                       year={post.year}
-                      reference={post.reference}
-                      image={post.image ? post.image : ""}
+                      references={post.references}
+                      image={
+                        post.image
+                          ? `https://cdn.jsdelivr.net/gh/davidbalian/history-media/${post.image}`
+                          : ""
+                      }
                       db={db}
                     />
                   ))}

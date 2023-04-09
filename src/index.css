@@ -466,8 +466,15 @@ header .logo {
 }
 
 .bio {
-  position: absolute;
-  bottom: 1rem;
+  max-width: 600px;
+  margin: auto;
+  padding: 1.5rem;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--accent-transparent-2);
+  border-radius: 8px;
 }
 
 table {

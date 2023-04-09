@@ -9,7 +9,7 @@ type PostProps = {
   text: String;
   year: Number;
   image: String;
-  reference: string;
+  references: string;
   db: firebase.firestore.Firestore;
 };
 
@@ -28,7 +28,7 @@ const Post: React.FC<PostProps> = ({
   text,
   year,
   image,
-  reference,
+  references,
   db,
 }) => {
   const [person, setPerson] = useState({} as Person);
@@ -77,7 +77,7 @@ const Post: React.FC<PostProps> = ({
           </div>
           <p className="status">{person.status}</p>
         </div>
-        <InfoPopup reference={reference} />
+        {references ? <InfoPopup reference={references.toString()} /> : null}
       </div>
       <p className="post-text">{text}</p>
       {image ? (
