@@ -61,13 +61,13 @@ function App() {
 
   return (
     <div className="App">
-      {user ? (
+      {/* {user ? (
         <button onClick={handleLogout} className="btn logout-btn">
           Logout
         </button>
-      ) : null}
+      ) : null} */}
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             user ? (
@@ -82,8 +82,19 @@ function App() {
               </div>
             )
           }
-        />
+        /> */}
+
         <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <Home db={db} />
+            </>
+          }
+        />
+
+        {/* <Route
           path="/login"
           element={
             user ? (
@@ -95,7 +106,7 @@ function App() {
               </div>
             )
           }
-        />
+        /> */}
         {/* <Route
           path="/signup"
           element={
@@ -109,7 +120,7 @@ function App() {
             )
           }
         /> */}
-        <Route
+        {/* <Route
           path="/guest"
           element={
             <>
@@ -117,7 +128,7 @@ function App() {
               <Home db={db} />
             </>
           }
-        />
+        /> */}
         <Route
           path="/:id"
           element={

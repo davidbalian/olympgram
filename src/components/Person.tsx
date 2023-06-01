@@ -82,6 +82,10 @@ const Person = () => {
     document.title = "Person | Olympgram";
   }, [id]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       {person && (
