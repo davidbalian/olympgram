@@ -13,6 +13,7 @@ import AddUser from "./components/AddUser";
 import Person from "./components/Person";
 import ScrollToTop from "./components/ScrollToTop";
 import Signup from "./components/Signup";
+import Footer from "./components/Footer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC-be2hEU-eyyD1bgpEgVRJ5opojfnphqY",
@@ -90,6 +91,7 @@ function App() {
             <>
               <Header />
               <Home db={db} />
+              <Footer />
             </>
           }
         />
@@ -135,6 +137,7 @@ function App() {
             <>
               <Header />
               <Person />
+              <Footer />
             </>
           }
         />

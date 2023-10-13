@@ -593,3 +593,14 @@ textarea {
     padding: 0 0;
   }
 }
+
+footer {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer p {
+  font-size: 14px;
+}
